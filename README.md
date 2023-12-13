@@ -5,22 +5,16 @@
 
 ### init_env
     init_env function is used to init the computation setup env,like CPU/GPU initialization
-
 ```
    pub fn init_env() {  
-
-}
+   }
 ```
 
 ### gen_task_proof
     gen_task_proof function is used to generate one task proof,if any error occurs,it will return "error"
-
-
 ```
     pub async fn gen_task_proof(task_id:u64,task_content:String,l2_url:String,l1_url:String) -> String { 
-
-}
-
+    }
     task_id : the taiko task id
     task_content : the task content,put together with "#" if there are several parameters
     l2_url:String : taiko L2 network http_url endpoint
@@ -29,15 +23,11 @@
 
 ### cancel_task_proof
     cancel_task_proof function is used to cancel one proof task,clear the memory and CPU/GPU resource if needed
-
 ```
     pub async fn cancel_task_proof(_task_id:u64)  { 
-
     }
-
-task_id : the taiko task id
+    task_id : the taiko task id
 ```
-
 
 ## run test
 ```
