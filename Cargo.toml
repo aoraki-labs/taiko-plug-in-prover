@@ -1,0 +1,36 @@
+[package]
+name = "taiko-plug-in-prover"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tracing = "0.1.30"
+log = "0.4.14"
+tracing-subscriber = "0.3.8"
+tokio-stream = "0.1.8"
+lazy_static = "1.4.0"
+
+
+#taiko A5 testnet core lib
+[dependencies.prover]
+git = "https://github.com/aoraki-labs/taiko-prover-core"
+branch = "taiko-a5-final"
+package = "prover"
+[dependencies.zkevm_common]
+git = "https://github.com/aoraki-labs/taiko-prover-core"
+branch = "taiko-a5-final"
+package = "zkevm_common"
+
+[dependencies.tokio]
+version = "1.16.1"
+features = [
+    "rt-multi-thread",
+    "macros",
+    "sync",
+    "net"
+]
+[dependencies.tokio-util]
+version = "0.7.0"
+features = ["codec"]
