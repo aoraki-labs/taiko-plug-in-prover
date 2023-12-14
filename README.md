@@ -37,7 +37,5 @@
 
 ## lib
     if you want to integrate the compiled lib directly,refer to the lib/dylib file : 
-    ```
         libtaiko_plug_in_prover.rlib
         libtaiko_prover.so
-    ```
