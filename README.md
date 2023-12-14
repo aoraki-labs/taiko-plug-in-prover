@@ -13,9 +13,9 @@
 ### gen_task_proof
     gen_task_proof function is used to generate one task proof,if any error occurs,it will return "error"
 ```
-    pub async fn gen_task_proof(task_id:u64,task_content:String,l2_url:String,l1_url:String) -> String { 
+    pub async fn gen_task_proof(task_id:String,task_content:String,l2_url:String,l1_url:String) -> String { 
     }
-    task_id : the taiko task id
+    task_id : the taiko task ids
     task_content : the task content,put together with "#" if there are several parameters
     l2_url:String : taiko L2 network http_url endpoint
     l1_url:String : taiko L1 network http_url endpoint

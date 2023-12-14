@@ -27,7 +27,7 @@ pub fn init_env() {
 
 /// gen_task_proof function is used to generate one task proof 
 /// if any error occur,it will return "error"
-pub async fn gen_task_proof(task_id:u64,task_content:String,l2_url:String,l1_url:String) -> String { 
+pub async fn gen_task_proof(task_id:String,task_content:String,l2_url:String,l1_url:String) -> String { 
     let task_vec: Vec<&str> = task_content.split("#").collect(); //Parse the task content
     if task_vec.len() != 14{
         error!("{} task parameter error,ignore it",task_id.clone());
@@ -51,7 +51,7 @@ pub async fn gen_task_proof(task_id:u64,task_content:String,l2_url:String,l1_url
 
     let agg_proof_result = match generate_proof(
         l2_url,
-        task_id,
+        task_id.parse::<u64>().unwrap(),  //TBD
         prover_address.clone(),
         l1_signal_service.clone(),
         l2_signal_service.clone(),
@@ -80,7 +80,7 @@ pub async fn gen_task_proof(task_id:u64,task_content:String,l2_url:String,l1_url
 
 /// gen_task_proof function is used to generate one task proof 
 /// if any error occur,it will return "error"
-pub async fn gen_task_proof_spawn(task_id:u64,task_content:String,l2_url:String,l1_url:String) -> String { 
+pub async fn gen_task_proof_spawn(task_id:String,task_content:String,l2_url:String,l1_url:String) -> String { 
     let task_vec: Vec<&str> = task_content.split("#").collect(); //Parse the task content
     if task_vec.len() != 14{
         error!("{} task parameter error,ignore it",task_id.clone());
@@ -120,7 +120,7 @@ pub async fn gen_task_proof_spawn(task_id:u64,task_content:String,l2_url:String,
     tokio::select! {
         val = generate_proof(
             l2_url,
-            task_id,
+            task_id.parse::<u64>().unwrap(),  //TBD
             prover_address.clone(),
             l1_signal_service.clone(),
             l2_signal_service.clone(),
@@ -183,7 +183,7 @@ mod tests {
         let task_id = 20865 as u64;
         let task_content = "94061Fd498291Ff1F1b8C0d1a94e2EDC2a0A2f9D#cD5e2bebd3DfE46e4BF96aE2ac7B89B22cc6a982#1000777700000000000000000000000000000007#1000777700000000000000000000000000000001#322e41c411a8223cce152999b30ee00b8f29dc5e62e02f43e0dc7a77aa862fa8#c73622fae1fbc1d1d9e4a9b7bbdb6733595c1c98a2470ea59ca3b9fee9ba3894#afcb03ea890fb2d5ba0042fcda321d8879687fb87a8d68b8ef4417dbc86754b0#9cc94396d73d6c51d8185249a1bcc7c55c87b3d6b67ce72600cfc8448dadc007#0000000000000000000000000000000000000000000000000000000000000000#1241987#328517#8000000#0#120000".to_string();
         let time_started = Instant::now();
-        let result = gen_task_proof_spawn(task_id,task_content,l2_url.clone(),l2_url).await;
+        let result = gen_task_proof_spawn(task_id.to_string(),task_content,l2_url.clone(),l2_url).await;
         println!("result is {},time consume is {}",result,Instant::now().duration_since(time_started).as_secs());
     }
 }
